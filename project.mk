@@ -29,7 +29,7 @@
 # **********************************************************
 
 # Add your config here!
-DEBUG=1
+DEBUG=0
 
 LIB_FREERTOS = 1
 

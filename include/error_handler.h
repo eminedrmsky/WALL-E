@@ -30,8 +30,17 @@ typedef enum{
     SW_TIMER_ERROR_MAX
 }eSwTimerErrors;
 
+typedef enum{
+    UART_SUCCESS =0,
+    UART_UNINITIALIZED,
+    UART_FIFO_INIT_ERROR,
+    UART_ERROR_MAX
+}eUartErrors;
+
 typedef struct{
     eI2SErrors i2s_error;
+    eSwTimerErrors sw_timer_error;
+    eUartErrors uart_error;
 }sErrorStatus;
 
 #endif

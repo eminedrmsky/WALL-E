@@ -25,7 +25,7 @@ typedef enum{
 }eFifoNumber;
 
 int fifoInit(eFifoNumber fifo_num);
-int fifoRead(eFifoNumber fifo_num, char* rx_data);
+int fifoRead(eFifoNumber fifo_num, unsigned char* rx_data);
 int fifoWrite(eFifoNumber fifo_num, unsigned char data);
 bool isFifoFull(eFifoNumber fifo_num);
 int fifoFlush(eFifoNumber fifo_num);

@@ -29,6 +29,8 @@
 #include "FreeRTOS.h" /* Must come first. */
 #include "task.h"     /* RTOS task related API prototypes. */
 #include "sw_timer.h"
+#include "error_handler.h"
+#include "serial.h"
 
 /***** Definitions *****/
 /* Used as a loop counter to create a very crude delay. */
@@ -42,7 +44,6 @@
 void vTask1(void* pvParameters)
 {
 	const char* pcTaskName = "Task 1 is running\r\n";
-	volatile uint32_t ul; /* volatile to ensure ul is not optimized away. */
 	 /* As per most tasks, this task is implemented in an infinite loop. */
 	for (;; )
 	{
@@ -56,7 +57,6 @@ void vTask1(void* pvParameters)
 void vTask2(void* pvParameters)
 {
 	const char* pcTaskName = "Task 2 is running\r\n";
-	volatile uint32_t ul; /* volatile to ensure ul is not optimized away. */
 	 /* As per most tasks, this task is implemented in an infinite loop. */
 	for (;; )
 	{
@@ -70,8 +70,18 @@ void vTask2(void* pvParameters)
 /******************************************************************************/
 int main(void)
 {
+	sErrorStatus errorHandler = {0};
 
-    swTimerStart();
+    errorHandler.sw_timer_error =  swTimerStart();
+	errorHandler.uart_error = uartInit();
+
+	if(errorHandler.sw_timer_error != SW_TIMER_SUCCESS){
+		UART_DEBUG("Error starting SW Timer\n");
+	}
+	if(errorHandler.uart_error != UART_SUCCESS){
+		UART_DEBUG("Error initializing UART\n");
+	}
+
 
 		uint32_t error = xTaskCreate(vTask1, /* Pointer to the function that implements the task. */
 		"Task 1",/* Text name for the task. This is to facilitate

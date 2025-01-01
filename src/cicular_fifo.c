@@ -47,7 +47,7 @@ int fifoWrite(eFifoNumber fifo_num, unsigned char data){
     return E_SUCCESS;
 }
 
-int fifoRead(eFifoNumber fifo_num, char* rx_data){
+int fifoRead(eFifoNumber fifo_num, unsigned char* rx_data){
 
     sFifo *pFifo = &fifoList[fifo_num]; // get the pointer to the fifo
 

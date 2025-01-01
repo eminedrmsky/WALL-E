@@ -51,7 +51,6 @@ eSwTimerErrors swTimerStart(void){
     SET_TIMEOUT(500, TIMEOUT_HEARTBEAT_1MS);
 
     return result;
-
 }
 
 eSwTimerErrors swTimerStop(void){
